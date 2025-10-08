@@ -1,7 +1,7 @@
 import socket
 import sys
 import pickle
-from game import State
+from game import Juego
 
 
 class Bot():
@@ -30,10 +30,10 @@ class Bot():
     def start(self):
         while (1):
             try:
-                data = self.s.recv(State.__sizeof__(State))
+                data = self.s.recv(Juego.__sizeof__(Juego))
                 if data is None:
                     raise Exception("Invalid data")
-                state: State = pickle.loads(data)
+                state: Juego = pickle.loads(data)
                 self.s.send(pickle.dumps(self.func(state)))
             except Exception as e:
                 print("[-] Error:", e)
